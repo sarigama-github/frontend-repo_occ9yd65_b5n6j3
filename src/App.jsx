@@ -39,9 +39,8 @@ const dictionary = {
   ja: {
     cart: "カート",
     brand_title: "ナイフ工房 HIDE",
-    // If you prefer kanji for the maker name, please confirm and we will update here.
-    maker_name: "イハヤザカ ヒデイチ",
-    brand_by: "日本の手仕事 — イハヤザカ ヒデイチ",
+    maker_name: "伊早坂秀一",
+    brand_by: "日本の手仕事 — 伊早坂秀一",
     hero_title: "手仕事が生む、日常を豊かにする一本",
     hero_sub:
       "一本ずつ手仕事で鍛え、仕上げる包丁。毎日の台所で、長く、心地よく。",
@@ -98,6 +97,8 @@ function App() {
   };
   const clearCart = () => setCart([]);
 
+  const cartCount = useMemo(() => cart.reduce((sum, it) => sum + it.quantity, 0), [cart]);
+
   return (
     <div className="min-h-screen bg-neutral-50 text-neutral-900">
       <Navbar
@@ -105,6 +106,7 @@ function App() {
         setLang={setLang}
         onCartOpen={() => setCartOpen(true)}
         t={t}
+        cartCount={cartCount}
       />
       <Hero t={t} />
       <Products t={t} onAddToCart={addToCart} />
